@@ -1,17 +1,44 @@
+var Location = require('../data/models.js').Location;
+
 module.exports = function(app) {
 
   app.get('/locations', function(request, response) {
-    response.send('GET /locations');
+    return Location.find({}, function (err, locations) {
+      if (!err) {
+        return response.send(locations);
+      } else {
+        return console.log(err);
+      }
+    });
   });
 
   app.post('/locations', function(request, response) {
-    response.send('POST /locations');
+    var location;
+    location = new Location({
+      bikeId: request.body.bikeId,
+      latitude: request.body.latitude,
+      longitude: request.body.longitude    
+    });
+    location.save(function (err) {
+      if (!err) {
+        return console.log("created");
+      } else {
+        return console.log(err);
+      }
+    });
+    return response.send(location);
   });
 
   app.get('/locations/:id', function(request, response) {
-    response.send('GET /locations/'+request.params.id);
+    return Location.findById(request.params.id, function (err, location) {
+      if (!err) {
+        return response.send(location);
+      } else {
+        return console.log(err);
+      }
+    });
   });
-
+/*
   app.put('/locations/:id', function(request, response) {
     response.send('PUT /locations');
   });
@@ -19,5 +46,5 @@ module.exports = function(app) {
   app.delete('/locations/:id', function(request, response) {
     response.send('DELETE /locations');
   });
-
+*/
 };
