@@ -1,6 +1,6 @@
 var mongoose = require('mongoose')
 
-var LocationType = mongoose.Schmema({
+var LocationType = mongoose.Schema({
 	longitude: Number,
 	latitude: Number
 });
@@ -18,12 +18,12 @@ var BikeSchema = mongoose.Schema({
 });
 
 var LocationSchema = mongoose.Schema({
-	location: LocationType,
+	location: [LocationType],
 	bikeId: mongoose.Schema.ObjectId
 });
 
 var RequestSchema = mongoose.Schema({
-	location: LocationType,
+	location: [LocationType],
 	hours: Number,
 	madeAt: Date,
 	madeBy: mongoose.Schema.ObjectId

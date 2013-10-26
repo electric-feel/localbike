@@ -1,5 +1,5 @@
 var mongoose = require('mongoose')
-var schemas = require('./schmemas.js')
+var schemas = require('./schemas.js')
 
 var Location = mongoose.model('Location', schemas.LocationSchema);
 var Bike = mongoose.model('Bike', schemas.BikeSchema);

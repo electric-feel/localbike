@@ -1,22 +1,24 @@
+var Request = require('../data/models.js').Request;
+
 module.exports = function(app) {
 
-  app.get('/requests', function(req, response) {
-    return RequestModel.find({}, function (err, requests) {
+  app.get('/requests', function(req, res) {
+    return Request.find({}, function (err, requests) {
       if (!err) {
         return res.send(requests);
       } else {
         return console.log(err);
       }
-    )};
+    });
   });
 
-  app.post('/requests', function(req, response) {
+  app.post('/requests', function(req, res) {
     var request;
-    request = new RequestModel({
+    request = new Request({
       made_at: Date.new(),
       latitude: req.body.latitude,
       longitude: req.body.longitude,
-      hours req.body.hours,
+      hours: req.body.hours,
     });
     request.save(function (err) {
       if (!err) {
@@ -28,14 +30,14 @@ module.exports = function(app) {
     return res.send(request);
   });
 
-  app.get('/requests/:id', function(req, response) {
-    return RequestModel.findById(request.params.id, function (err, product) {
+  app.get('/requests/:id', function(req, res) {
+    return Request.findById(request.params.id, function (err, product) {
       if (!err) {
         return res.send(product);
       } else {
         return console.log(err);
       }
-    )};
+    });
   });
 
   app.put('/requests/:id', function(req, response) {
