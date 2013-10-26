@@ -15,17 +15,40 @@
 
   <script src="http://code.jquery.com/jquery-1.9.1.js"></script>
   <script src="http://code.jquery.com/ui/1.10.3/jquery-ui.js"></script>
+  <script src="js/jquery.loadAnimation.js"></script>
   <script>
   $(function() {
-    var spinner = $( "#spinner" ).spinner();
-	var spinner2 = $( "#spinner2" ).spinner();
+    $( "#spinner" ).spinner();
+	 $( "#spinner2" ).spinner();
+	
+	$("#findButton").click(function () {
+		$('body').loadAnimation({
+										opacity:0.8,
+										color:'#ccc',
+										image: {
+											src: 'images/loading.gif',
+											alt: 'loading...',
+											size: {
+												width: 220
+											}
+										}
+									});
+									window.setInterval(function () {
+										$.loadAnimation.end(); 
+										window.location = "offers.html";
+									},2000);
+									
+			
+									
+	});
+	
  
   });
   </script>
 </head>
 
   <body>
-		<div class="spinner-ui">
+		<div id="load-ui">
         <div class="page-header">
           <h1>find bike</h1>
         </div>
@@ -40,13 +63,10 @@
 		  <input id="spinner2" name="value" />
 		  <label for="spinner">meter</label>
 		</p>
-		</div>
+		
         <br>
-        <a href="offers.html">
-        <button type="button" class="btn btn-default btn-lg btn-block">
-          find
-        </button></a>
-
+        <button type="button" id="findButton" class="btn btn-default btn-lg btn-block">find</button>
+</div>
 
   </body>
 </html>
