@@ -9,29 +9,35 @@
 		window.app.AppRouter = Backbone.Router.extend({
 
   			routes: {
-  			    "":     "standard",
-      			"help": "help",
-      			"list": "list"
+  			    "":     "home",
+      			"profile": "profile",
+      			"bikes": "bikes",
+      			"find": "find"
       		},
       		
-      		standard: function () {
-      			
+      		home: function () {
+      			var view = new app.HomeView();
       		},
   
-  			list: function () {
-  				var listView = new app.ListView();
+  			profile: function () {
+  				var view = new app.ProfileView();
   			},
 
-			help: function() {
-				var helpView = new app.HelpView();
+			bikes: function() {
+				var view = new app.BikesView();
+  			},
+  			
+  			find: function() {
+				var view = new app.FindView();
   			}
 
 		});
-
-
-    	// Initiate the router
+		
+		window.app = window.app || { };
+			
 		var app_router = new app.AppRouter;
 		Backbone.history.start();
+
 	});
 
 })(jQuery);
