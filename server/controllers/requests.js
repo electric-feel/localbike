@@ -1,4 +1,6 @@
 var Request = require("../data/models.js").Request;
+var Location = require("../data/models.js").Location;
+var Bike = require("../data/models.js").Bike;
 
 module.exports = function(app) {
 
@@ -30,19 +32,25 @@ module.exports = function(app) {
   });
 
   app.get('/api/requests/:id', function(req, res) {
-    return Request.findById(req.params.id, function (err, product) {
+    return Request.findById(req.params.id, function (err, request) {
       if (!err) {
-        return res.send(product);
+        return res.send(request);
       } else {
         return console.log(err);
       }
     });
   });
   
-  app.get('/requests/:id/near_bikes', function(req,res){
-    Request.findById(req.params.id, function(err, request){
-      request.findNearBikes(function(err,bikes){
-        return res.send(bikes);
+  app.get('/api/requests/:id/near_bikes', function(req,res) {
+    return Request.findById(req.params.id, function(err, request){
+      Location.find({location:{$nearSphere: request.location, $maxDistance: 0.01}}, function(err, locations){
+        bike_ids = locations.map(function(l){
+          return l.bikeId;
+        });
+        bike_ids = bike_ids.filter(function(n){return n});
+        Bike.find({_id: { $in: bike_ids }}, function(err, bikes){
+          res.send(bikes);
+        });
       });
     });
   });

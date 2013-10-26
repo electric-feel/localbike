@@ -24,19 +24,6 @@ var RequestSchema = mongoose.Schema({
 	madeBy: mongoose.Schema.ObjectId
 });
 
-RequestSchema.methods.findNearBikes = function(){
-  mongoose.model('LocationSchema', LocationSchema)
-    .find({location: { $nearSphere: this.location, $maxDistance: 0.01}}, function(err, locations){
-      
-      return locations;
-      /*console.log(locations);
-      locations.map(
-        function(loc){
-          return mongoose.model('BikeSchema', BikeSchema).findById(loc.bikeId);
-        }); */
-    }) 
-};
-
 var ConfirmationSchema = mongoose.Schema({
 	sentTo: mongoose.Schema.ObjectId,
 	confirmedAt: Number,
