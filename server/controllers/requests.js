@@ -1,15 +1,13 @@
-var Request = require('../data/models.js').Request;
-
 module.exports = function(app) {
 
-  app.get('/requests', function(req, res) {
-    return Request.find({}, function (err, requests) {
+  app.get('/requests', function(req, response) {
+    return RequestModel.find({}, function (err, requests) {
       if (!err) {
         return res.send(requests);
       } else {
         return console.log(err);
       }
-    });
+    )};
   });
 
   app.post('/requests', function(req, res) {
@@ -19,7 +17,7 @@ module.exports = function(app) {
       madeBy: req.body.madeBy,
       latitude: req.body.latitude,
       longitude: req.body.longitude,
-      hours: req.body.hours,
+      hours req.body.hours,
     });
     request.save(function (err) {
       if (!err) {
@@ -38,7 +36,7 @@ module.exports = function(app) {
       } else {
         return console.log(err);
       }
-    });
+    )};
   });
 
   app.put('/requests/:id', function(req, response) {
