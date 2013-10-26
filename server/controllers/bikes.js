@@ -1,3 +1,5 @@
+Bike = require('../data/models.js').Bike;
+
 module.exports = function(app) {
 
   app.get('/bikes', function(request, response) {
@@ -36,14 +38,6 @@ module.exports = function(app) {
         return console.log(err);
       }
     });
-  });
-
-  app.put('/bikes/:id', function(request, response) {
-    response.send('PUT /bikes');
-  });
-
-  app.delete('/bikes/:id', function(request, response) {
-    response.send('DELETE /bikes');
   });
 
 };
