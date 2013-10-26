@@ -1,15 +1,42 @@
 module.exports = function(app) {
 
+
+
   app.get('/rentals', function(request, response) {
-    response.send('GET /rentals');
+      return Rental.find({}, function (err, rentals) {
+      if (!err) {
+        return response.send(rentals);
+      } else {
+        return console.log(err);
+      }
+    });
   });
 
   app.post('/rentals', function(request, response) {
-    response.send('POST /rentals');
+    var rental;
+    rental = new Rental({
+      returnedAt: req.body.returnedAt,
+      receivedAt: req.body.receivedAt,
+	  confirmationId: req.body.confirmationId,
+    });
+    rental.save(function (err) {
+      if (!err) {
+        return console.log("created");
+      } else {
+        return console.log(err);
+      }
+    });
+    return response.send(rental);
   });
 
   app.get('/rentals/:id', function(request, response) {
-    response.send('GET /rentals/'+request.params.id);
+       return Rental.findById(request.params.id, function (err, product) {
+      if (!err) {
+        return res.send(product);
+      } else {
+        return console.log(err);
+      }
+    });
   });
 
   app.put('/rentals/:id', function(request, response) {
