@@ -13,7 +13,6 @@ module.exports = function(app) {
   });
 
   app.post('/requests', function(req, res) {
-    console.log(req.body);
     var request = new Request({
       madeAt: Date(),
       madeBy: req.body.madeBy,
