@@ -39,12 +39,4 @@ module.exports = function(app) {
     )};
   });
 
-  app.put('/requests/:id', function(req, response) {
-    response.send('PUT /requests');
-  });
-
-  app.delete('/requests/:id', function(req, response) {
-    response.send('DELETE /requests');
-  });
-
 };
