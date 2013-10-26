@@ -13,13 +13,13 @@ module.exports = function(app) {
   app.post('/confirmations', function(request, response) {
     var confirmation;
     confirmation = new Confirmation({
-		sentTo: req.body.sentTo,
-		confirmedAt: req.body.confirmedAt,
-		declinedAt: req.body.declinedAt,
-		acceptedAt: req.body.acceptedAt,
-		requestId: req.body.requestId,
-		bikeId: req.body.bikeId,
-		locationId: req.body.locationId
+		sentTo: request.body.sentTo,
+		confirmedAt: request.body.confirmedAt,
+		declinedAt: request.body.declinedAt,
+		acceptedAt: request.body.acceptedAt,
+		requestId: request.body.requestId,
+		bikeId: request.body.bikeId,
+		locationId: request.body.locationId
     });
     confirmation.save(function (err) {
       if (!err) {

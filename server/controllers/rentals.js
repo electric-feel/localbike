@@ -15,9 +15,9 @@ module.exports = function(app) {
   app.post('/rentals', function(request, response) {
     var rental;
     rental = new Rental({
-      returnedAt: req.body.returnedAt,
-      receivedAt: req.body.receivedAt,
-	  confirmationId: req.body.confirmationId,
+      returnedAt: request.body.returnedAt,
+      receivedAt: request.body.receivedAt,
+	  confirmationId: request.body.confirmationId,
     });
     rental.save(function (err) {
       if (!err) {
