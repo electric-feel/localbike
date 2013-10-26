@@ -13,18 +13,29 @@ var BikeSchema = mongoose.Schema({
 });
 
 var LocationSchema = mongoose.Schema({
-	longitude: Number,
-	latitude: Number,
+  location: {type: [Number], index: '2d'},
 	bikeId: mongoose.Schema.ObjectId
 });
 
 var RequestSchema = mongoose.Schema({
-	longitude: Number,
-	latitude: Number,
+  location: {type: [Number], index: '2d'},
 	hours: Number,
 	madeAt: Date,
 	madeBy: mongoose.Schema.ObjectId
 });
+
+RequestSchema.methods.findNearBikes = function(){
+  mongoose.model('LocationSchema', LocationSchema)
+    .find({location: { $nearSphere: this.location, $maxDistance: 0.01}}, function(err, locations){
+      
+      return locations;
+      /*console.log(locations);
+      locations.map(
+        function(loc){
+          return mongoose.model('BikeSchema', BikeSchema).findById(loc.bikeId);
+        }); */
+    }) 
+};
 
 var ConfirmationSchema = mongoose.Schema({
 	sentTo: mongoose.Schema.ObjectId,

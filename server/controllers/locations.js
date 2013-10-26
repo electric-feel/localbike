@@ -16,8 +16,7 @@ module.exports = function(app) {
     var location;
     location = new Location({
       bikeId: request.body.bikeId,
-      latitude: request.body.latitude,
-      longitude: request.body.longitude    
+      location: [request.body.latitude, request.body.longitude]
     });
     location.save(function (err) {
       if (!err) {

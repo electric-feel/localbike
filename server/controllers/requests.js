@@ -16,8 +16,7 @@ module.exports = function(app) {
     var request = new Request({
       madeAt: Date(),
       madeBy: req.body.madeBy,
-      latitude: req.body.latitude,
-      longitude: req.body.longitude,
+      location: [req.body.latitude, req.body.longitude],
       hours: req.body.hours,
     });
     request.save(function (err) {
@@ -37,6 +36,14 @@ module.exports = function(app) {
       } else {
         return console.log(err);
       }
+    });
+  });
+  
+  app.get('/requests/:id/near_bikes', function(req,res){
+    Request.findById(req.params.id, function(err, request){
+      request.findNearBikes(function(err,bikes){
+        return res.send(bikes);
+      });
     });
   });
 
