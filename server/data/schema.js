@@ -1,41 +1,55 @@
 var mongoose = require('mongoose')
 
-var locationSchema = mongoose.Schema({
+var LocationType = mongoose.Schmema({
 	longitude: Number,
-	latitude: Number,
-})
+	latitude: Number
+});
 
-var bikeSchema = mongoose.Schema({
+var UserSchema = mongoose.Schema({
+	email: String,
+	passwd: String
+});
+
+var BikeSchema = mongoose.Schema({
 	description: String,
 	photo: String,
 	code: String,
-	Location : locationSchema,
-})
+	userId: mongoose.Schema.ObjectId
+});
 
-var userSchema = mongoose.Schema({
-	email: String,
-	passwd: String,
-	bikes: [bikeSchema],
-})
+var LocationSchema = mongoose.Schema({
+	location: LocationType,
+	bikeId: mongoose.Schema.ObjectId
+});
 
+var RequestSchema = mongoose.Schema({
+	location: LocationType,
+	hours: Number,
+	madeAt: Date,
+	madeBy: mongoose.Schema.ObjectId
+});
 
-var confirmationSchema = mongoose.Schema({
+var ConfirmationSchema = mongoose.Schema({
+	sentTo: mongoose.Schema.ObjectId,
 	confirmedAt: Number,
 	declinedAt: Number,
 	acceptedAt: Number,
-	request: requestSchema,
-	bike: bikeSchema
-})
+	requestId: mongoose.Schema.ObjectId,
+	bikeId: mongoose.Schema.ObjectId,
+	locationId: mongoose.Schema.ObjectId
+});
 
-var rentalSchema = mongoose.Schema({
-	confirmation: confirmationSchema,
+var RentalSchema = mongoose.Schema({
 	returnedAt: Number,
 	receivedAt: Number,
-})
+	confirmationId: mongoose.Schema.ObjectId
+});
 
-var requestSchema = mongoose.Schema({
-	location: locationSchema,lo
-	hours: Float,
-	made_at: Number,
-	confirmations: [confirmationSchema],
- })
+module.exports = {
+  UserSchema: UserSchema,
+  BikeSchema: BikeSchema,
+  LocationSchema: LocationSchema,
+  RequestSchema: RequestSchema,
+  ConfirmationSchema: ConfirmationSchema,
+  RentalSchema: RequestSchema
+}
