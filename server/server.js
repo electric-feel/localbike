@@ -3,6 +3,8 @@ var express = require("express");
 var app = express();
 app.use(express.logger());
 app.use(express.bodyParser());
+app.set('views', __dirname + '/views')
+app.set('view engine', 'jade')
 
 // connect to mongodb
 var uristring =  process.env.MONGOLAB_URI || 'mongodb://localhost/localbike';
@@ -15,12 +17,8 @@ mongoose.connect(uristring, function (err, res) {
   }
 });
 
-// a test method
-app.get('/', function(request, response) {
-  response.send('Hello World!');
-});
-
 // load controllers
+require("./controllers/website.js")(app);
 require("./controllers/bikes.js")(app);
 require("./controllers/confirmations.js")(app);
 require("./controllers/locations.js")(app);

@@ -1,6 +1,6 @@
 module.exports = function(app) {
 
-  app.get('/confirmations', function(request, response) {
+  app.get('/api/confirmations', function(request, response) {
       return Confirmation.find({}, function (err, product) {
       if (!err) {
         return response.send(product);
@@ -10,7 +10,7 @@ module.exports = function(app) {
     });
   });
 
-  app.post('/confirmations', function(request, response) {
+  app.post('/api/confirmations', function(request, response) {
     var confirmation;
     confirmation = new Confirmation({
 		sentTo: request.body.sentTo,
@@ -31,7 +31,7 @@ module.exports = function(app) {
     return response.send(confirmation);
   });
 
-  app.get('/confirmations/:id', function(request, response) {
+  app.get('/api/confirmations/:id', function(request, response) {
       return Confirmation.findById(request.params.id, function (err, product) {
       if (!err) {
         return response.send(product);
@@ -39,14 +39,6 @@ module.exports = function(app) {
         return console.log(err);
       }
     });
-  });
-
-  app.put('/confirmations/:id', function(request, response) {
-    response.send('PUT /confirmations');
-  });
-
-  app.delete('/confirmations/:id', function(request, response) {
-    response.send('DELETE /confirmations');
   });
 
 };
