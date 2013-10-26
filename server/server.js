@@ -8,7 +8,7 @@ var uristring =  process.env.MONGOLAB_URI || 'mongodb://localhost/localbike';
 var mongoose = require('mongoose');
 mongoose.connect(uristring, function (err, res) {
   if (err) {
-    console.log ('ERROR connecting to: ' + uristring + '. ' + err);
+    console.log ('Failed connecting to: ' + uristring + '. ' + err);
   } else {
     console.log ('Succeeded connected to: ' + uristring);
   }
@@ -18,6 +18,23 @@ mongoose.connect(uristring, function (err, res) {
 app.get('/', function(request, response) {
   response.send('Hello World!');
 });
+
+// load controllers
+require("./controllers/bikes.js")(app);
+require("./controllers/confirmations.js")(app);
+require("./controllers/locations.js")(app);
+require("./controllers/rentals.js")(app);
+require("./controllers/requests.js")(app);
+require("./controllers/users.js")(app);
+
+
+
+
+
+
+
+
+
 
 // start app
 var port = process.env.PORT || 5000;
