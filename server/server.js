@@ -2,6 +2,7 @@
 var express = require("express");
 var app = express();
 app.use(express.logger());
+app.use(express.bodyParser());
 
 // connect to mongodb
 var uristring =  process.env.MONGOLAB_URI || 'mongodb://localhost/localbike';

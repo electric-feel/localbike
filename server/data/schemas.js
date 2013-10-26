@@ -1,10 +1,5 @@
 var mongoose = require('mongoose')
 
-var LocationType = mongoose.Schema({
-	longitude: Number,
-	latitude: Number
-});
-
 var UserSchema = mongoose.Schema({
 	email: String,
 	passwd: String
@@ -18,12 +13,14 @@ var BikeSchema = mongoose.Schema({
 });
 
 var LocationSchema = mongoose.Schema({
-	location: [LocationType],
+	longitude: Number,
+	latitude: Number,
 	bikeId: mongoose.Schema.ObjectId
 });
 
 var RequestSchema = mongoose.Schema({
-	location: [LocationType],
+	longitude: Number,
+	latitude: Number,
 	hours: Number,
 	madeAt: Date,
 	madeBy: mongoose.Schema.ObjectId
