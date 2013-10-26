@@ -27,15 +27,6 @@ require("./controllers/rentals.js")(app);
 require("./controllers/requests.js")(app);
 require("./controllers/users.js")(app);
 
-
-
-
-
-
-
-
-
-
 // start app
 var port = process.env.PORT || 5000;
 app.listen(port, function() {
