@@ -3,8 +3,9 @@ var express = require("express");
 var app = express();
 app.use(express.logger());
 app.use(express.bodyParser());
-app.set('views', __dirname + '/views')
-app.set('view engine', 'jade')
+
+app.use(express.compress());
+app.use('/', express.static('../client'));
 
 // connect to mongodb
 var uristring =  process.env.MONGOLAB_URI || 'mongodb://localhost/localbike';
