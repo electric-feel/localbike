@@ -32,7 +32,7 @@ module.exports = function(app) {
   app.get('/rentals/:id', function(request, response) {
        return Rental.findById(request.params.id, function (err, product) {
       if (!err) {
-        return res.send(product);
+        return response.send(product);
       } else {
         return console.log(err);
       }
