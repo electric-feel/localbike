@@ -2,7 +2,7 @@ var Location = require('../data/models.js').Location;
 
 module.exports = function(app) {
 
-  app.get('/locations', function(request, response) {
+  app.get('/api/locations', function(request, response) {
     return Location.find({}, function (err, locations) {
       if (!err) {
         return response.send(locations);
@@ -12,7 +12,7 @@ module.exports = function(app) {
     });
   });
 
-  app.post('/locations', function(request, response) {
+  app.post('/api/locations', function(request, response) {
     var location;
     location = new Location({
       bikeId: request.body.bikeId,
@@ -29,7 +29,7 @@ module.exports = function(app) {
     return response.send(location);
   });
 
-  app.get('/locations/:id', function(request, response) {
+  app.get('/api/locations/:id', function(request, response) {
     return Location.findById(request.params.id, function (err, location) {
       if (!err) {
         return response.send(location);
@@ -38,13 +38,5 @@ module.exports = function(app) {
       }
     });
   });
-/*
-  app.put('/locations/:id', function(request, response) {
-    response.send('PUT /locations');
-  });
 
-  app.delete('/locations/:id', function(request, response) {
-    response.send('DELETE /locations');
-  });
-*/
 };

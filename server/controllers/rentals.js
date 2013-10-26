@@ -1,8 +1,6 @@
 module.exports = function(app) {
 
-
-
-  app.get('/rentals', function(request, response) {
+  app.get('/apirentals', function(request, response) {
       return Rental.find({}, function (err, rentals) {
       if (!err) {
         return response.send(rentals);
@@ -12,7 +10,7 @@ module.exports = function(app) {
     });
   });
 
-  app.post('/rentals', function(request, response) {
+  app.post('/api/rentals', function(request, response) {
     var rental;
     rental = new Rental({
       returnedAt: request.body.returnedAt,
@@ -29,7 +27,7 @@ module.exports = function(app) {
     return response.send(rental);
   });
 
-  app.get('/rentals/:id', function(request, response) {
+  app.get('/api/rentals/:id', function(request, response) {
        return Rental.findById(request.params.id, function (err, product) {
       if (!err) {
         return response.send(product);
@@ -37,14 +35,6 @@ module.exports = function(app) {
         return console.log(err);
       }
     });
-  });
-
-  app.put('/rentals/:id', function(request, response) {
-    response.send('PUT /rentals');
-  });
-
-  app.delete('/rentals/:id', function(request, response) {
-    response.send('DELETE /rentals');
   });
 
 };

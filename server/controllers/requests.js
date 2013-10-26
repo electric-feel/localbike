@@ -2,7 +2,7 @@ var Request = require("../data/models.js").Request;
 
 module.exports = function(app) {
 
-  app.get('/requests', function(req, res) {
+  app.get('/api/requests', function(req, res) {
     return Request.find({}, function (err, requests) {
       if (!err) {
         return res.send(requests);
@@ -12,7 +12,7 @@ module.exports = function(app) {
     });
   });
 
-  app.post('/requests', function(req, res) {
+  app.post('/api/requests', function(req, res) {
     var request = new Request({
       madeAt: Date(),
       madeBy: req.body.madeBy,
@@ -30,7 +30,7 @@ module.exports = function(app) {
     return res.send(request);
   });
 
-  app.get('/requests/:id', function(req, res) {
+  app.get('/api/requests/:id', function(req, res) {
     return Request.findById(req.params.id, function (err, product) {
       if (!err) {
         return res.send(product);
