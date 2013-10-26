@@ -21,30 +21,6 @@
   </head>
   <body>
 
-
-  <div class="navbar navbar-inverse navbar-fixed-top">
-      <div class="container">
-        <div class="navbar-header">
-          <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-          </button>
-          <a class="navbar-brand" href="#">localbike</a>
-        </div>
-        <div class="navbar-collapse collapse">
-          <ul class="nav navbar-nav">
-            <li class="active"><a href="#">Home</a></li>
-            <li><a href="#about">profile</a></li>
-            <li><a href="#contact">my bikes</a></li>
-            <li><a href="#contact">find bike</a></li>
-          </ul>
-        </div><!--/.navbar-collapse -->
-      </div>
-    </div>
-
-<!-- Begin page content -->
-      <div class="container">
         <div class="page-header">
           <h1>borrowed bike</h1>
         </div>
@@ -57,7 +33,7 @@
         </button>
         </a>
         </p>
-        <p><button type="button" class="btn btn-primary btn-lg btn-block">
+        <p><button type="button" id="returned" class="btn btn-primary btn-lg btn-block">
           I returned the bike
         </button></p>
         <div class="panel panel-default">
@@ -65,14 +41,6 @@
             <img src="images/peugeot.jpg" class="img-responsive" alt="bike image">
           </div>
         </div>
-        <hr>
-
-      <footer>
-        <p>&copy; localbike.org</p>
-      </footer>
-      </div>
-	
-    </div>
 
 
 
@@ -80,6 +48,15 @@
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
     <!-- Include all compiled plugins (below), or include individual files as needed -->
     <script src="js/bootstrap.min.js"></script>
+    <script>
+    parent.$("#findBike").attr("href", "view_borrowed.html");
+        parent.$("#findBike").html("borrowed bike");
+        $("#returned").click(function() {
+        	parent.$("#findBike").attr("href", "find_bike.html");
+        	parent.$("#findBike").html("find bike");
+        	window.location = "home.html";
+        });
+    </script>
   </body>
 </html>
 
